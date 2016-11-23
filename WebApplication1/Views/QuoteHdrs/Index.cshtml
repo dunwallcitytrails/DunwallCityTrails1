@@ -9,8 +9,14 @@
     {
         <div class="form-group">
                 @Html.LabelFor(m => m.CompanyId)
-                @Html.DropDownListFor(m => m.CompanyId, new SelectList(Model.Companies, "Key", "Value", Model.CompanyId), null, new { @class = "company-dropdown" })
+                @Html.DropDownListFor(m => m.CompanyId, new SelectList(Model.Companies, "Key", "Value", Model.CompanyId), "Any Company", new { @class = "company-dropdown" })
         </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.UserId)
+            @Html.DropDownListFor(m => m.UserId, new SelectList(Model.Users, "Key", "Value", Model.UserId), "Any User", new { @class = "company-dropdown" })
+        </div>
+
         <div class="form-group">
             <input type="submit" class="btn btn-default btn-xs" value="Search" />
         </div>

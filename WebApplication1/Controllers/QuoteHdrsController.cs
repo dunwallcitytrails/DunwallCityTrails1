@@ -21,6 +21,7 @@ namespace WebApplication1.Controllers
             QuoteFilterViewModel model = new QuoteFilterViewModel();
 
             model.Companies = await db.Companies.ToDictionaryAsync(c => c.CompanyID, c => c.CompanyName);
+            model.Users = await db.Users.ToDictionaryAsync(u => u.UserId, u => u.UserName);
             model.Quotes = await db.QuoteHdrs.ToListAsync();
 
             return View(model);
@@ -30,8 +31,21 @@ namespace WebApplication1.Controllers
         public async Task<ActionResult> Index(QuoteFilterViewModel model)
         {
             model.Companies = await db.Companies.ToDictionaryAsync(c => c.CompanyID, c => c.CompanyName);
-            model.Quotes = await db.QuoteHdrs.Where(q => q.CompanyID == model.CompanyId).ToListAsync();
+            model.Users = await db.Users.ToDictionaryAsync(c => c.UserId, c => c.UserName);
 
+            IQueryable<QuoteHdr> set = db.QuoteHdrs.AsQueryable();
+
+            if (true)
+            {
+                set = set.Where(q => q.CompanyID == model.CompanyId);
+            }
+
+            if (true)
+            {
+                set = set.Where(q => q.UserID == model.UserId);
+            }
+
+            model.Quotes = await set.ToListAsync();
             return View(model);
         }
 

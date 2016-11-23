@@ -12,5 +12,9 @@ namespace WebApplication1.Models
         public Dictionary<int, string> Companies { get; set; }
         [Display(Name = "Company")]
         public int CompanyId { get; set; }
+        public Dictionary<Guid, string> Users { get; set; }
+        [Display(Name = "User")]
+        public Guid UserId { get; set; }
+        public string QuoteRef { get; set; }
     }
 }
