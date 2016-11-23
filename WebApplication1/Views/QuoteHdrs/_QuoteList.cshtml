@@ -1,0 +1,259 @@
+﻿@model IEnumerable<WebApplication1.Models.QuoteHdr>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.QuoteRef)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemDescriptionShort)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemDescriptionLong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemSalesDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DrawingNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Hours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TareWeight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Length)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Width)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Height)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SellPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostMaterial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AllowReprint)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuoteFile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecialRequirement)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Discount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecReqSellPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecReqSellCost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Timestamp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WarrantyPeriod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CubicCapacity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuoteRefId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiscountAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiscountType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShowRequirementOnQuote)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecialRequirementB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecReqSellPriceB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SpecReqSellCostB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Company.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.ContactFirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeliveryTerm.DeliveryTerm1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trailer.ItemNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Registration.RegistrationDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Transportation.TransportationDescription)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuoteRef)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemDescriptionShort)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemDescriptionLong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemSalesDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DrawingNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TareWeight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Length)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Width)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Height)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SellPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostMaterial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AllowReprint)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuoteFile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecialRequirement)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecReqSellPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecReqSellCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Timestamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WarrantyPeriod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CubicCapacity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuoteRefId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiscountAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiscountType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShowRequirementOnQuote)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecialRequirementB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecReqSellPriceB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpecReqSellCostB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.ContactFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryTerm.DeliveryTerm1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Trailer.ItemNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Registration.RegistrationDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Transportation.TransportationDescription)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.QuoteID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.QuoteID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.QuoteID })
+            </td>
+        </tr>
+    }
+
+</table>

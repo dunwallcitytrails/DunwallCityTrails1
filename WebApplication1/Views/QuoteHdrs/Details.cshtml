@@ -1,0 +1,338 @@
+﻿@model WebApplication1.Models.QuoteHdr
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>QuoteHdr</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.QuoteRef)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuoteRef)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemDescriptionShort)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemDescriptionShort)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemDescriptionLong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemDescriptionLong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemSalesDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemSalesDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DrawingNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DrawingNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TareWeight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TareWeight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Length)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Length)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Width)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Width)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Height)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Height)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SellPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SellPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CostMaterial)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CostMaterial)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AllowReprint)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AllowReprint)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuoteFile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuoteFile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpecialRequirement)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpecialRequirement)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Discount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Discount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpecReqSellPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpecReqSellPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpecReqSellCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpecReqSellCost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CostedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CostedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Timestamp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Timestamp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WarrantyPeriod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WarrantyPeriod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CubicCapacity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CubicCapacity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuoteRefId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuoteRefId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiscountType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiscountType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShowRequirementOnQuote)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShowRequirementOnQuote)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpecialRequirementB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpecialRequirementB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpecReqSellPriceB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpecReqSellPriceB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpecReqSellCostB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpecReqSellCostB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Company.CompanyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Company.CompanyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.ContactFirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.ContactFirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveryTerm.DeliveryTerm1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveryTerm.DeliveryTerm1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Trailer.ItemNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trailer.ItemNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Registration.RegistrationDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Registration.RegistrationDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Transportation.TransportationDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Transportation.TransportationDescription)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.QuoteID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

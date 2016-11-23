@@ -1,0 +1,2137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="KruegerQuotesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Applications">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationName" Type="nvarchar" MaxLength="235" Nullable="false" />
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CatID" />
+          </Key>
+          <Property Name="CatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryDescription" Type="nvarchar" MaxLength="100" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="SortOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="ContactFirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="Suburb" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="Postcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="ContactSurname" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="DeliveryTerm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeliveryTerm" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Footer">
+          <Key>
+            <PropertyRef Name="FooterID" />
+          </Key>
+          <Property Name="FooterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Content" Type="nchar" MaxLength="1500" />
+        </EntityType>
+        <EntityType Name="Memberships">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PasswordFormat" Type="int" Nullable="false" />
+          <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordQuestion" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordAnswer" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+          <Property Name="LastPasswordChangedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLockoutDate" Type="datetime" Nullable="false" />
+          <Property Name="FailedPasswordAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="datetime" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptWindowsStart" Type="datetime" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="256" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Profiles">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PropertyNames" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="PropertyValueStrings" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="PropertyValueBinary" Type="image" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuoteHdr">
+          <Key>
+            <PropertyRef Name="QuoteID" />
+          </Key>
+          <Property Name="QuoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuoteRef" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserID" Type="uniqueidentifier" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="TrailerID" Type="int" Nullable="false" />
+          <Property Name="ItemNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemDescriptionShort" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ItemDescriptionLong" Type="nvarchar" MaxLength="500" />
+          <Property Name="ItemSalesDescription" Type="nvarchar" MaxLength="400" />
+          <Property Name="DrawingNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Hours" Type="float" />
+          <Property Name="TareWeight" Type="int" Nullable="false" />
+          <Property Name="Length" Type="float" />
+          <Property Name="Width" Type="float" />
+          <Property Name="Height" Type="float" />
+          <Property Name="SellPrice" Type="money" Nullable="false" />
+          <Property Name="CostMaterial" Type="money" />
+          <Property Name="CreatedDateTime" Type="datetime" />
+          <Property Name="AllowReprint" Type="bigint" />
+          <Property Name="DeliveryTermId" Type="int" />
+          <Property Name="QuoteFile" Type="nvarchar" MaxLength="500" />
+          <Property Name="SpecialRequirement" Type="nvarchar" MaxLength="500" />
+          <Property Name="Discount" Type="float" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="SpecReqSellPrice" Type="money" Nullable="false" />
+          <Property Name="SpecReqSellCost" Type="money" Nullable="false" />
+          <Property Name="CostedBy" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Timestamp" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="RegistrationId" Type="int" />
+          <Property Name="TransportationId" Type="int" />
+          <Property Name="WarrantyPeriod" Type="nvarchar" MaxLength="500" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CubicCapacity" Type="int" />
+          <Property Name="QuoteRefId" Type="int" Nullable="false" />
+          <Property Name="DiscountAmount" Type="numeric" Precision="28" Scale="2" />
+          <Property Name="DiscountType" Type="int" />
+          <Property Name="ShowRequirementOnQuote" Type="bit" />
+          <Property Name="SpecialRequirementB" Type="nvarchar" MaxLength="500" />
+          <Property Name="SpecReqSellPriceB" Type="money" Nullable="false" />
+          <Property Name="SpecReqSellCostB" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuoteLine">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatID" Type="int" Nullable="false" />
+          <Property Name="OptionID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OptionDescription" Type="nvarchar" MaxLength="400" />
+          <Property Name="UoM" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UnitsPerTrailer" Type="int" Nullable="false" />
+          <Property Name="TareWeightOption" Type="int" />
+          <Property Name="DrawingNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="PartNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Hours" Type="float" />
+          <Property Name="SellPrice" Type="money" />
+          <Property Name="CostMaterial" Type="money" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="CommentQuoteLine" Type="nvarchar" MaxLength="100" />
+          <Property Name="AllowDiscount" Type="bit" />
+          <Property Name="QuoteHdrId" Type="int" />
+          <Property Name="isDefault" Type="bit" />
+          <Property Name="PriceBookSell" Type="money" Nullable="false" />
+          <Property Name="CubicCapacityOption" Type="int" />
+          <Property Name="MaximumUnits" Type="int" />
+          <Property Name="UnitMultiplier" Type="int" />
+          <Property Name="OptionQuantity" Type="int" />
+          <Property Name="PrintQuantityOnQuote" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuoteLineDefaults">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CatID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CatID" Type="int" Nullable="false" />
+          <Property Name="OptionID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="OptionDescription" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="UoM" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UnitsPerTrailer" Type="int" Nullable="false" />
+          <Property Name="TareWeightOption" Type="int" />
+          <Property Name="DrawingNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="PartNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Hours" Type="float" />
+          <Property Name="SellPrice" Type="money" />
+          <Property Name="CostMaterial" Type="money" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="CommentQuoteLine" Type="nvarchar" MaxLength="100" />
+          <Property Name="AllowDiscount" Type="bit" />
+          <Property Name="QuoteHdrId" Type="int" />
+          <Property Name="CubicCapacityOption" Type="int" />
+        </EntityType>
+        <EntityType Name="QuoteRefs">
+          <Key>
+            <PropertyRef Name="QuoteRefId" />
+          </Key>
+          <Property Name="QuoteRefId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuoteRef" Type="varchar" MaxLength="50" />
+          <Property Name="DateQuoted" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="RegistrationID" />
+          </Key>
+          <Property Name="RegistrationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegistrationDescription" Type="varchar(max)" Nullable="false" />
+          <Property Name="RegoFee" Type="money" />
+          <Property Name="PlateFee" Type="money" />
+          <Property Name="isDefault" Type="bit" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="AdminFee" Type="money" />
+          <Property Name="ProcessingFee" Type="money" />
+          <Property Name="StampDuty" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="TrailerType" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'KruegerQuotes.dbo.ReportTable' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ReportTable">
+          <Key>
+            <PropertyRef Name="TableId" />
+          </Key>
+          <Property Name="TableId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TableName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="SettingId" />
+          </Key>
+          <Property Name="SettingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Trailer">
+          <Key>
+            <PropertyRef Name="TrailerID" />
+          </Key>
+          <Property Name="TrailerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemDescriptionShort" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ItemDescriptionLong" Type="nvarchar" MaxLength="500" />
+          <Property Name="ItemSalesDescription" Type="nvarchar" MaxLength="400" />
+          <Property Name="DrawingNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Hours" Type="float" />
+          <Property Name="TareWeight" Type="int" Nullable="false" />
+          <Property Name="Length" Type="float" />
+          <Property Name="Width" Type="float" />
+          <Property Name="Height" Type="float" />
+          <Property Name="SellPrice" Type="money" Nullable="false" />
+          <Property Name="CostMaterial" Type="money" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="SortOrder" Type="int" Nullable="false" />
+          <Property Name="MaxDiscount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Margin" Type="int" />
+          <Property Name="WarrantyPeriod" Type="nvarchar" MaxLength="500" />
+          <Property Name="CubicCapacity" Type="int" />
+          <Property Name="TrailerType" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrailerDefaults">
+          <Key>
+            <PropertyRef Name="TrailerID" />
+            <PropertyRef Name="CatID" />
+          </Key>
+          <Property Name="TrailerID" Type="int" Nullable="false" />
+          <Property Name="CatID" Type="int" Nullable="false" />
+          <Property Name="OptionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrailerOption">
+          <Key>
+            <PropertyRef Name="OptionID" />
+            <PropertyRef Name="CatID" />
+          </Key>
+          <Property Name="OptionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OptionDescription" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="OptionDescriptionExtended" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="CatID" Type="int" Nullable="false" />
+          <Property Name="UoM" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UnitsPerTrailer" Type="int" Nullable="false" />
+          <Property Name="TareWeightOption" Type="int" />
+          <Property Name="DrawingNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="PartNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Hours" Type="float" />
+          <Property Name="SellPrice" Type="money" />
+          <Property Name="CostMaterial" Type="money" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="AllowDiscount" Type="bit" />
+          <Property Name="Margin" Type="int" />
+          <Property Name="PriceBookPrice" Type="money" />
+          <Property Name="CubicCapacityOption" Type="int" />
+          <Property Name="MaximumUnits" Type="int" />
+          <Property Name="UnitMultiplier" Type="int" />
+          <Property Name="PrintQuantityOnQuote" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrailerQuestion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="TrailerID" Type="int" Nullable="false" />
+          <Property Name="CatID" Type="int" Nullable="false" />
+          <Property Name="Active" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrailerQuestionAnswer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="TrailerID" Type="int" Nullable="false" />
+          <Property Name="CatID" Type="int" Nullable="false" />
+          <Property Name="OptionID" Type="int" Nullable="false" />
+          <Property Name="Active" Type="int" Nullable="false" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transportation">
+          <Key>
+            <PropertyRef Name="TransportationID" />
+          </Key>
+          <Property Name="TransportationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransportationDescription" Type="varchar(max)" Nullable="false" />
+          <Property Name="Cost" Type="money" />
+          <Property Name="Sell" Type="money" />
+          <Property Name="isDefault" Type="bit" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+          <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'KruegerQuotes.dbo.Wages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Wages">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="HourRate" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HourRate" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'KruegerQuotes.dbo.zzz' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="zzz">
+          <Key>
+            <PropertyRef Name="OptionID" />
+            <PropertyRef Name="OptionDescription" />
+            <PropertyRef Name="OptionDescriptionExtended" />
+            <PropertyRef Name="UnitsPerTrailer" />
+          </Key>
+          <Property Name="OptionID" Type="int" Nullable="false" />
+          <Property Name="OptionDescription" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="OptionDescriptionExtended" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="UnitsPerTrailer" Type="int" Nullable="false" />
+          <Property Name="TareWeightOption" Type="int" />
+          <Property Name="SellPrice" Type="money" />
+          <Property Name="CostMaterial" Type="money" />
+          <Property Name="PriceBookPrice" Type="money" />
+          <Property Name="MaximumUnits" Type="int" />
+          <Property Name="UnitMultiplier" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'KruegerQuotes.dbo.zzzTrailerOption' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="zzzTrailerOption">
+          <Key>
+            <PropertyRef Name="OptionID" />
+            <PropertyRef Name="OptionDescription" />
+            <PropertyRef Name="OptionDescriptionExtended" />
+            <PropertyRef Name="CatID" />
+            <PropertyRef Name="UoM" />
+            <PropertyRef Name="UnitsPerTrailer" />
+            <PropertyRef Name="PrintQuantityOnQuote" />
+          </Key>
+          <Property Name="OptionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OptionDescription" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="OptionDescriptionExtended" Type="nvarchar" MaxLength="400" Nullable="false" />
+          <Property Name="CatID" Type="int" Nullable="false" />
+          <Property Name="UoM" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UnitsPerTrailer" Type="int" Nullable="false" />
+          <Property Name="TareWeightOption" Type="int" />
+          <Property Name="DrawingNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="PartNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Hours" Type="float" />
+          <Property Name="SellPrice" Type="money" />
+          <Property Name="CostMaterial" Type="money" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="AllowDiscount" Type="bit" />
+          <Property Name="Margin" Type="int" />
+          <Property Name="PriceBookPrice" Type="money" />
+          <Property Name="CubicCapacityOption" Type="int" />
+          <Property Name="MaximumUnits" Type="int" />
+          <Property Name="UnitMultiplier" Type="int" />
+          <Property Name="PrintQuantityOnQuote" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Customer__Compan__1E6F845E">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customer__Compan__1F63A897">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customer__Compan__2057CCD0">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QuoteHdr__Compan__22751F6C">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="QuoteHdr" Type="Self.QuoteHdr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="QuoteHdr">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QuoteHdr__Custom__245D67DE">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="QuoteHdr" Type="Self.QuoteHdr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="QuoteHdr">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QuoteHdr__Delive__395884C4">
+          <End Role="DeliveryTerm" Type="Self.DeliveryTerm" Multiplicity="0..1" />
+          <End Role="QuoteHdr" Type="Self.QuoteHdr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeliveryTerm">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuoteHdr">
+              <PropertyRef Name="DeliveryTermId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QuoteHdr__Traile__2645B050">
+          <End Role="Trailer" Type="Self.Trailer" Multiplicity="1" />
+          <End Role="QuoteHdr" Type="Self.QuoteHdr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trailer">
+              <PropertyRef Name="TrailerID" />
+            </Principal>
+            <Dependent Role="QuoteHdr">
+              <PropertyRef Name="TrailerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QuoteLine__CatID__19DFD96B">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="QuoteLine" Type="Self.QuoteLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CatID" />
+            </Principal>
+            <Dependent Role="QuoteLine">
+              <PropertyRef Name="CatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QuoteLine__Quote__25518C17">
+          <End Role="QuoteHdr" Type="Self.QuoteHdr" Multiplicity="0..1" />
+          <End Role="QuoteLine" Type="Self.QuoteLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuoteHdr">
+              <PropertyRef Name="QuoteID" />
+            </Principal>
+            <Dependent Role="QuoteLine">
+              <PropertyRef Name="QuoteHdrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TrailerDe__CatID__160F4887">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="TrailerDefaults" Type="Self.TrailerDefaults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CatID" />
+            </Principal>
+            <Dependent Role="TrailerDefaults">
+              <PropertyRef Name="CatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TrailerDe__Trail__151B244E">
+          <End Role="Trailer" Type="Self.Trailer" Multiplicity="1" />
+          <End Role="TrailerDefaults" Type="Self.TrailerDefaults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trailer">
+              <PropertyRef Name="TrailerID" />
+            </Principal>
+            <Dependent Role="TrailerDefaults">
+              <PropertyRef Name="TrailerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TrailerDe__Trail__5AB9788F">
+          <End Role="Trailer" Type="Self.Trailer" Multiplicity="1" />
+          <End Role="TrailerDefaults" Type="Self.TrailerDefaults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trailer">
+              <PropertyRef Name="TrailerID" />
+            </Principal>
+            <Dependent Role="TrailerDefaults">
+              <PropertyRef Name="TrailerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TrailerDe__Trail__7849DB76">
+          <End Role="Trailer" Type="Self.Trailer" Multiplicity="1" />
+          <End Role="TrailerDefaults" Type="Self.TrailerDefaults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trailer">
+              <PropertyRef Name="TrailerID" />
+            </Principal>
+            <Dependent Role="TrailerDefaults">
+              <PropertyRef Name="TrailerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TrailerOp__CatID__2BFE89A6">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="TrailerOption" Type="Self.TrailerOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CatID" />
+            </Principal>
+            <Dependent Role="TrailerOption">
+              <PropertyRef Name="CatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuoteHdr_Registration">
+          <End Role="Registration" Type="Self.Registration" Multiplicity="0..1" />
+          <End Role="QuoteHdr" Type="Self.QuoteHdr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="RegistrationID" />
+            </Principal>
+            <Dependent Role="QuoteHdr">
+              <PropertyRef Name="RegistrationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuoteHdr_Transportation">
+          <End Role="Transportation" Type="Self.Transportation" Multiplicity="0..1" />
+          <End Role="QuoteHdr" Type="Self.QuoteHdr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transportation">
+              <PropertyRef Name="TransportationID" />
+            </Principal>
+            <Dependent Role="QuoteHdr">
+              <PropertyRef Name="TransportationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuoteLineDefaults_QuoteHdr">
+          <End Role="QuoteHdr" Type="Self.QuoteHdr" Multiplicity="0..1" />
+          <End Role="QuoteLineDefaults" Type="Self.QuoteLineDefaults" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuoteHdr">
+              <PropertyRef Name="QuoteID" />
+            </Principal>
+            <Dependent Role="QuoteLineDefaults">
+              <PropertyRef Name="QuoteHdrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MembershipApplication">
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Memberships" Type="Self.Memberships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MembershipUser">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Memberships" Type="Self.Memberships" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RoleApplication">
+          <End Role="Applications" Type="Self.Applications" Multiplicity="1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserProfile">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Profiles" Type="Self.Profiles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Profiles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsersInRoleUser">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UsersInRoles" Type="Self.UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KruegerQuotesModelStoreContainer">
+          <EntitySet Name="Applications" EntityType="Self.Applications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeliveryTerm" EntityType="Self.DeliveryTerm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Footer" EntityType="Self.Footer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Memberships" EntityType="Self.Memberships" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profiles" EntityType="Self.Profiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuoteHdr" EntityType="Self.QuoteHdr" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuoteLine" EntityType="Self.QuoteLine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuoteLineDefaults" EntityType="Self.QuoteLineDefaults" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuoteRefs" EntityType="Self.QuoteRefs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registration" EntityType="Self.Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trailer" EntityType="Self.Trailer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrailerDefaults" EntityType="Self.TrailerDefaults" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrailerOption" EntityType="Self.TrailerOption" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrailerQuestion" EntityType="Self.TrailerQuestion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrailerQuestionAnswer" EntityType="Self.TrailerQuestionAnswer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transportation" EntityType="Self.Transportation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersInRoles" EntityType="Self.UsersInRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportTable" EntityType="Self.ReportTable" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ReportTable].[TableId] AS [TableId], 
+    [ReportTable].[TableName] AS [TableName]
+    FROM [dbo].[ReportTable] AS [ReportTable]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Wages" EntityType="Self.Wages" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Wages].[Id] AS [Id], 
+    [Wages].[HourRate] AS [HourRate]
+    FROM [dbo].[Wages] AS [Wages]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="zzz" EntityType="Self.zzz" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [zzz].[OptionID] AS [OptionID], 
+    [zzz].[OptionDescription] AS [OptionDescription], 
+    [zzz].[OptionDescriptionExtended] AS [OptionDescriptionExtended], 
+    [zzz].[UnitsPerTrailer] AS [UnitsPerTrailer], 
+    [zzz].[TareWeightOption] AS [TareWeightOption], 
+    [zzz].[SellPrice] AS [SellPrice], 
+    [zzz].[CostMaterial] AS [CostMaterial], 
+    [zzz].[PriceBookPrice] AS [PriceBookPrice], 
+    [zzz].[MaximumUnits] AS [MaximumUnits], 
+    [zzz].[UnitMultiplier] AS [UnitMultiplier]
+    FROM [dbo].[zzz] AS [zzz]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="zzzTrailerOption" EntityType="Self.zzzTrailerOption" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [zzzTrailerOption].[OptionID] AS [OptionID], 
+    [zzzTrailerOption].[OptionDescription] AS [OptionDescription], 
+    [zzzTrailerOption].[OptionDescriptionExtended] AS [OptionDescriptionExtended], 
+    [zzzTrailerOption].[CatID] AS [CatID], 
+    [zzzTrailerOption].[UoM] AS [UoM], 
+    [zzzTrailerOption].[UnitsPerTrailer] AS [UnitsPerTrailer], 
+    [zzzTrailerOption].[TareWeightOption] AS [TareWeightOption], 
+    [zzzTrailerOption].[DrawingNo] AS [DrawingNo], 
+    [zzzTrailerOption].[PartNo] AS [PartNo], 
+    [zzzTrailerOption].[Hours] AS [Hours], 
+    [zzzTrailerOption].[SellPrice] AS [SellPrice], 
+    [zzzTrailerOption].[CostMaterial] AS [CostMaterial], 
+    [zzzTrailerOption].[SortOrder] AS [SortOrder], 
+    [zzzTrailerOption].[Active] AS [Active], 
+    [zzzTrailerOption].[AllowDiscount] AS [AllowDiscount], 
+    [zzzTrailerOption].[Margin] AS [Margin], 
+    [zzzTrailerOption].[PriceBookPrice] AS [PriceBookPrice], 
+    [zzzTrailerOption].[CubicCapacityOption] AS [CubicCapacityOption], 
+    [zzzTrailerOption].[MaximumUnits] AS [MaximumUnits], 
+    [zzzTrailerOption].[UnitMultiplier] AS [UnitMultiplier], 
+    [zzzTrailerOption].[PrintQuantityOnQuote] AS [PrintQuantityOnQuote]
+    FROM [dbo].[zzzTrailerOption] AS [zzzTrailerOption]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Customer__Compan__1E6F845E" Association="Self.FK__Customer__Compan__1E6F845E">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customer__Compan__1F63A897" Association="Self.FK__Customer__Compan__1F63A897">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customer__Compan__2057CCD0" Association="Self.FK__Customer__Compan__2057CCD0">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QuoteHdr__Compan__22751F6C" Association="Self.FK__QuoteHdr__Compan__22751F6C">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="QuoteHdr" EntitySet="QuoteHdr" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QuoteHdr__Custom__245D67DE" Association="Self.FK__QuoteHdr__Custom__245D67DE">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="QuoteHdr" EntitySet="QuoteHdr" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QuoteHdr__Delive__395884C4" Association="Self.FK__QuoteHdr__Delive__395884C4">
+            <End Role="DeliveryTerm" EntitySet="DeliveryTerm" />
+            <End Role="QuoteHdr" EntitySet="QuoteHdr" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QuoteHdr__Traile__2645B050" Association="Self.FK__QuoteHdr__Traile__2645B050">
+            <End Role="Trailer" EntitySet="Trailer" />
+            <End Role="QuoteHdr" EntitySet="QuoteHdr" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QuoteLine__CatID__19DFD96B" Association="Self.FK__QuoteLine__CatID__19DFD96B">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="QuoteLine" EntitySet="QuoteLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QuoteLine__Quote__25518C17" Association="Self.FK__QuoteLine__Quote__25518C17">
+            <End Role="QuoteHdr" EntitySet="QuoteHdr" />
+            <End Role="QuoteLine" EntitySet="QuoteLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TrailerDe__CatID__160F4887" Association="Self.FK__TrailerDe__CatID__160F4887">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="TrailerDefaults" EntitySet="TrailerDefaults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TrailerDe__Trail__151B244E" Association="Self.FK__TrailerDe__Trail__151B244E">
+            <End Role="Trailer" EntitySet="Trailer" />
+            <End Role="TrailerDefaults" EntitySet="TrailerDefaults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TrailerDe__Trail__5AB9788F" Association="Self.FK__TrailerDe__Trail__5AB9788F">
+            <End Role="Trailer" EntitySet="Trailer" />
+            <End Role="TrailerDefaults" EntitySet="TrailerDefaults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TrailerDe__Trail__7849DB76" Association="Self.FK__TrailerDe__Trail__7849DB76">
+            <End Role="Trailer" EntitySet="Trailer" />
+            <End Role="TrailerDefaults" EntitySet="TrailerDefaults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TrailerOp__CatID__2BFE89A6" Association="Self.FK__TrailerOp__CatID__2BFE89A6">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="TrailerOption" EntitySet="TrailerOption" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuoteHdr_Registration" Association="Self.FK_QuoteHdr_Registration">
+            <End Role="Registration" EntitySet="Registration" />
+            <End Role="QuoteHdr" EntitySet="QuoteHdr" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuoteHdr_Transportation" Association="Self.FK_QuoteHdr_Transportation">
+            <End Role="Transportation" EntitySet="Transportation" />
+            <End Role="QuoteHdr" EntitySet="QuoteHdr" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuoteLineDefaults_QuoteHdr" Association="Self.FK_QuoteLineDefaults_QuoteHdr">
+            <End Role="QuoteHdr" EntitySet="QuoteHdr" />
+            <End Role="QuoteLineDefaults" EntitySet="QuoteLineDefaults" />
+          </AssociationSet>
+          <AssociationSet Name="MembershipApplication" Association="Self.MembershipApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="MembershipUser" Association="Self.MembershipUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="RoleApplication" Association="Self.RoleApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="UserProfile" Association="Self.UserProfile">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Profiles" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="UsersInRoleUser" Association="Self.UsersInRoleUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UsersInRoles" EntitySet="UsersInRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KruegerQuotesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationName" Type="String" MaxLength="235" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Memberships" Relationship="Self.MembershipApplication" FromRole="Applications" ToRole="Memberships" />
+          <NavigationProperty Name="Roles" Relationship="Self.RoleApplication" FromRole="Applications" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CatID" />
+          </Key>
+          <Property Name="CatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="SortOrder" Type="Int32" />
+          <NavigationProperty Name="QuoteLines" Relationship="Self.FK__QuoteLine__CatID__19DFD96B" FromRole="Category" ToRole="QuoteLine" />
+          <NavigationProperty Name="TrailerDefaults" Relationship="Self.FK__TrailerDe__CatID__160F4887" FromRole="Category" ToRole="TrailerDefaults" />
+          <NavigationProperty Name="TrailerOptions" Relationship="Self.FK__TrailerOp__CatID__2BFE89A6" FromRole="Category" ToRole="TrailerOption" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK__Customer__Compan__1E6F845E" FromRole="Company" ToRole="Customer" />
+          <NavigationProperty Name="Customers1" Relationship="Self.FK__Customer__Compan__1F63A897" FromRole="Company" ToRole="Customer" />
+          <NavigationProperty Name="Customers2" Relationship="Self.FK__Customer__Compan__2057CCD0" FromRole="Company" ToRole="Customer" />
+          <NavigationProperty Name="QuoteHdrs" Relationship="Self.FK__QuoteHdr__Compan__22751F6C" FromRole="Company" ToRole="QuoteHdr" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="ContactFirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Suburb" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Postcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ContactSurname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="Self.FK__Customer__Compan__1E6F845E" FromRole="Customer" ToRole="Company" />
+          <NavigationProperty Name="Company1" Relationship="Self.FK__Customer__Compan__1F63A897" FromRole="Customer" ToRole="Company" />
+          <NavigationProperty Name="Company2" Relationship="Self.FK__Customer__Compan__2057CCD0" FromRole="Customer" ToRole="Company" />
+          <NavigationProperty Name="QuoteHdrs" Relationship="Self.FK__QuoteHdr__Custom__245D67DE" FromRole="Customer" ToRole="QuoteHdr" />
+        </EntityType>
+        <EntityType Name="DeliveryTerm">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeliveryTerm1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="QuoteHdrs" Relationship="Self.FK__QuoteHdr__Delive__395884C4" FromRole="DeliveryTerm" ToRole="QuoteHdr" />
+        </EntityType>
+        <EntityType Name="Footer">
+          <Key>
+            <PropertyRef Name="FooterID" />
+          </Key>
+          <Property Name="FooterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="String" MaxLength="1500" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordFormat" Type="Int32" Nullable="false" />
+          <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordQuestion" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordAnswer" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsApproved" Type="Boolean" Nullable="false" />
+          <Property Name="IsLockedOut" Type="Boolean" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLoginDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastPasswordChangedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastLockoutDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FailedPasswordAttemptCount" Type="Int32" Nullable="false" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="Int32" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptWindowsStart" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comment" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Application" Relationship="Self.MembershipApplication" FromRole="Memberships" ToRole="Applications" />
+          <NavigationProperty Name="User" Relationship="Self.MembershipUser" FromRole="Memberships" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="PropertyNames" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PropertyValueStrings" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PropertyValueBinary" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="User" Relationship="Self.UserProfile" FromRole="Profiles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="QuoteHdr">
+          <Key>
+            <PropertyRef Name="QuoteID" />
+          </Key>
+          <Property Name="QuoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuoteRef" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserID" Type="Guid" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="TrailerID" Type="Int32" Nullable="false" />
+          <Property Name="ItemNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ItemDescriptionShort" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ItemDescriptionLong" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ItemSalesDescription" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="DrawingNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Hours" Type="Double" />
+          <Property Name="TareWeight" Type="Int32" Nullable="false" />
+          <Property Name="Length" Type="Double" />
+          <Property Name="Width" Type="Double" />
+          <Property Name="Height" Type="Double" />
+          <Property Name="SellPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="CostMaterial" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="AllowReprint" Type="Int64" />
+          <Property Name="DeliveryTermId" Type="Int32" />
+          <Property Name="QuoteFile" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SpecialRequirement" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Discount" Type="Double" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="SpecReqSellPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="SpecReqSellCost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="CostedBy" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Timestamp" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="RegistrationId" Type="Int32" />
+          <Property Name="TransportationId" Type="Int32" />
+          <Property Name="WarrantyPeriod" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CubicCapacity" Type="Int32" />
+          <Property Name="QuoteRefId" Type="Int32" Nullable="false" />
+          <Property Name="DiscountAmount" Type="Decimal" Precision="28" Scale="2" />
+          <Property Name="DiscountType" Type="Int32" />
+          <Property Name="ShowRequirementOnQuote" Type="Boolean" />
+          <Property Name="SpecialRequirementB" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SpecReqSellPriceB" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="SpecReqSellCostB" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK__QuoteHdr__Compan__22751F6C" FromRole="QuoteHdr" ToRole="Company" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__QuoteHdr__Custom__245D67DE" FromRole="QuoteHdr" ToRole="Customer" />
+          <NavigationProperty Name="DeliveryTerm" Relationship="Self.FK__QuoteHdr__Delive__395884C4" FromRole="QuoteHdr" ToRole="DeliveryTerm" />
+          <NavigationProperty Name="Trailer" Relationship="Self.FK__QuoteHdr__Traile__2645B050" FromRole="QuoteHdr" ToRole="Trailer" />
+          <NavigationProperty Name="QuoteLines" Relationship="Self.FK__QuoteLine__Quote__25518C17" FromRole="QuoteHdr" ToRole="QuoteLine" />
+          <NavigationProperty Name="Registration" Relationship="Self.FK_QuoteHdr_Registration" FromRole="QuoteHdr" ToRole="Registration" />
+          <NavigationProperty Name="Transportation" Relationship="Self.FK_QuoteHdr_Transportation" FromRole="QuoteHdr" ToRole="Transportation" />
+          <NavigationProperty Name="QuoteLineDefaults" Relationship="Self.FK_QuoteLineDefaults_QuoteHdr" FromRole="QuoteHdr" ToRole="QuoteLineDefaults" />
+        </EntityType>
+        <EntityType Name="QuoteLine">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CatID" Type="Int32" Nullable="false" />
+          <Property Name="OptionID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OptionDescription" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="UoM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UnitsPerTrailer" Type="Int32" Nullable="false" />
+          <Property Name="TareWeightOption" Type="Int32" />
+          <Property Name="DrawingNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PartNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Hours" Type="Double" />
+          <Property Name="SellPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CostMaterial" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="CommentQuoteLine" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AllowDiscount" Type="Boolean" />
+          <Property Name="QuoteHdrId" Type="Int32" />
+          <Property Name="isDefault" Type="Boolean" />
+          <Property Name="PriceBookSell" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="CubicCapacityOption" Type="Int32" />
+          <Property Name="MaximumUnits" Type="Int32" />
+          <Property Name="UnitMultiplier" Type="Int32" />
+          <Property Name="OptionQuantity" Type="Int32" />
+          <Property Name="PrintQuantityOnQuote" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__QuoteLine__CatID__19DFD96B" FromRole="QuoteLine" ToRole="Category" />
+          <NavigationProperty Name="QuoteHdr" Relationship="Self.FK__QuoteLine__Quote__25518C17" FromRole="QuoteLine" ToRole="QuoteHdr" />
+        </EntityType>
+        <EntityType Name="QuoteLineDefault">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="CatID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CatID" Type="Int32" Nullable="false" />
+          <Property Name="OptionID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OptionDescription" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UoM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UnitsPerTrailer" Type="Int32" Nullable="false" />
+          <Property Name="TareWeightOption" Type="Int32" />
+          <Property Name="DrawingNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PartNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Hours" Type="Double" />
+          <Property Name="SellPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CostMaterial" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="CommentQuoteLine" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AllowDiscount" Type="Boolean" />
+          <Property Name="QuoteHdrId" Type="Int32" />
+          <Property Name="CubicCapacityOption" Type="Int32" />
+          <NavigationProperty Name="QuoteHdr" Relationship="Self.FK_QuoteLineDefaults_QuoteHdr" FromRole="QuoteLineDefaults" ToRole="QuoteHdr" />
+        </EntityType>
+        <EntityType Name="QuoteRef">
+          <Key>
+            <PropertyRef Name="QuoteRefId" />
+          </Key>
+          <Property Name="QuoteRefId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuoteRef1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DateQuoted" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="RegistrationID" />
+          </Key>
+          <Property Name="RegistrationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegistrationDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RegoFee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PlateFee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="isDefault" Type="Boolean" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="AdminFee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ProcessingFee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="StampDuty" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="TrailerType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="QuoteHdrs" Relationship="Self.FK_QuoteHdr_Registration" FromRole="Registration" ToRole="QuoteHdr" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="RoleId" Type="Guid" Nullable="false" />
+          <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Application" Relationship="Self.RoleApplication" FromRole="Roles" ToRole="Applications" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="SettingId" />
+          </Key>
+          <Property Name="SettingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Trailer">
+          <Key>
+            <PropertyRef Name="TrailerID" />
+          </Key>
+          <Property Name="TrailerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ItemDescriptionShort" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ItemDescriptionLong" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ItemSalesDescription" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="DrawingNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Hours" Type="Double" />
+          <Property Name="TareWeight" Type="Int32" Nullable="false" />
+          <Property Name="Length" Type="Double" />
+          <Property Name="Width" Type="Double" />
+          <Property Name="Height" Type="Double" />
+          <Property Name="SellPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="CostMaterial" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="SortOrder" Type="Int32" Nullable="false" />
+          <Property Name="MaxDiscount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Margin" Type="Int32" />
+          <Property Name="WarrantyPeriod" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CubicCapacity" Type="Int32" />
+          <Property Name="TrailerType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="QuoteHdrs" Relationship="Self.FK__QuoteHdr__Traile__2645B050" FromRole="Trailer" ToRole="QuoteHdr" />
+          <NavigationProperty Name="TrailerDefaults" Relationship="Self.FK__TrailerDe__Trail__151B244E" FromRole="Trailer" ToRole="TrailerDefaults" />
+          <NavigationProperty Name="TrailerDefaults1" Relationship="Self.FK__TrailerDe__Trail__5AB9788F" FromRole="Trailer" ToRole="TrailerDefaults" />
+          <NavigationProperty Name="TrailerDefaults2" Relationship="Self.FK__TrailerDe__Trail__7849DB76" FromRole="Trailer" ToRole="TrailerDefaults" />
+        </EntityType>
+        <EntityType Name="TrailerDefault">
+          <Key>
+            <PropertyRef Name="TrailerID" />
+            <PropertyRef Name="CatID" />
+          </Key>
+          <Property Name="TrailerID" Type="Int32" Nullable="false" />
+          <Property Name="CatID" Type="Int32" Nullable="false" />
+          <Property Name="OptionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__TrailerDe__CatID__160F4887" FromRole="TrailerDefaults" ToRole="Category" />
+          <NavigationProperty Name="Trailer" Relationship="Self.FK__TrailerDe__Trail__151B244E" FromRole="TrailerDefaults" ToRole="Trailer" />
+          <NavigationProperty Name="Trailer1" Relationship="Self.FK__TrailerDe__Trail__5AB9788F" FromRole="TrailerDefaults" ToRole="Trailer" />
+          <NavigationProperty Name="Trailer2" Relationship="Self.FK__TrailerDe__Trail__7849DB76" FromRole="TrailerDefaults" ToRole="Trailer" />
+        </EntityType>
+        <EntityType Name="TrailerOption">
+          <Key>
+            <PropertyRef Name="OptionID" />
+            <PropertyRef Name="CatID" />
+          </Key>
+          <Property Name="OptionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OptionDescription" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OptionDescriptionExtended" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CatID" Type="Int32" Nullable="false" />
+          <Property Name="UoM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UnitsPerTrailer" Type="Int32" Nullable="false" />
+          <Property Name="TareWeightOption" Type="Int32" />
+          <Property Name="DrawingNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PartNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Hours" Type="Double" />
+          <Property Name="SellPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CostMaterial" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="AllowDiscount" Type="Boolean" />
+          <Property Name="Margin" Type="Int32" />
+          <Property Name="PriceBookPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CubicCapacityOption" Type="Int32" />
+          <Property Name="MaximumUnits" Type="Int32" />
+          <Property Name="UnitMultiplier" Type="Int32" />
+          <Property Name="PrintQuantityOnQuote" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__TrailerOp__CatID__2BFE89A6" FromRole="TrailerOption" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="TrailerQuestion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="TrailerID" Type="Int32" Nullable="false" />
+          <Property Name="CatID" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="TrailerQuestionAnswer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="TrailerID" Type="Int32" Nullable="false" />
+          <Property Name="CatID" Type="Int32" Nullable="false" />
+          <Property Name="OptionID" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Int32" Nullable="false" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Transportation">
+          <Key>
+            <PropertyRef Name="TransportationID" />
+          </Key>
+          <Property Name="TransportationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransportationDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Sell" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="isDefault" Type="Boolean" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="QuoteHdrs" Relationship="Self.FK_QuoteHdr_Transportation" FromRole="Transportation" ToRole="QuoteHdr" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="LastActivityDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Membership" Relationship="Self.MembershipUser" FromRole="Users" ToRole="Memberships" />
+          <NavigationProperty Name="Profile" Relationship="Self.UserProfile" FromRole="Users" ToRole="Profiles" />
+          <NavigationProperty Name="UsersInRoles" Relationship="Self.UsersInRoleUser" FromRole="Users" ToRole="UsersInRoles" />
+        </EntityType>
+        <EntityType Name="UsersInRole">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="RoleId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.UsersInRoleUser" FromRole="UsersInRoles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="ReportTable">
+          <Key>
+            <PropertyRef Name="TableId" />
+          </Key>
+          <Property Name="TableId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TableName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Wage">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="HourRate" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HourRate" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="zzz">
+          <Key>
+            <PropertyRef Name="OptionID" />
+            <PropertyRef Name="OptionDescription" />
+            <PropertyRef Name="OptionDescriptionExtended" />
+            <PropertyRef Name="UnitsPerTrailer" />
+          </Key>
+          <Property Name="OptionID" Type="Int32" Nullable="false" />
+          <Property Name="OptionDescription" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OptionDescriptionExtended" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UnitsPerTrailer" Type="Int32" Nullable="false" />
+          <Property Name="TareWeightOption" Type="Int32" />
+          <Property Name="SellPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CostMaterial" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PriceBookPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MaximumUnits" Type="Int32" />
+          <Property Name="UnitMultiplier" Type="Int32" />
+        </EntityType>
+        <EntityType Name="zzzTrailerOption">
+          <Key>
+            <PropertyRef Name="OptionID" />
+            <PropertyRef Name="OptionDescription" />
+            <PropertyRef Name="OptionDescriptionExtended" />
+            <PropertyRef Name="CatID" />
+            <PropertyRef Name="UoM" />
+            <PropertyRef Name="UnitsPerTrailer" />
+            <PropertyRef Name="PrintQuantityOnQuote" />
+          </Key>
+          <Property Name="OptionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OptionDescription" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OptionDescriptionExtended" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CatID" Type="Int32" Nullable="false" />
+          <Property Name="UoM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UnitsPerTrailer" Type="Int32" Nullable="false" />
+          <Property Name="TareWeightOption" Type="Int32" />
+          <Property Name="DrawingNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PartNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Hours" Type="Double" />
+          <Property Name="SellPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CostMaterial" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="AllowDiscount" Type="Boolean" />
+          <Property Name="Margin" Type="Int32" />
+          <Property Name="PriceBookPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CubicCapacityOption" Type="Int32" />
+          <Property Name="MaximumUnits" Type="Int32" />
+          <Property Name="UnitMultiplier" Type="Int32" />
+          <Property Name="PrintQuantityOnQuote" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="MembershipApplication">
+          <End Role="Applications" Type="Self.Application" Multiplicity="1" />
+          <End Role="Memberships" Type="Self.Membership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RoleApplication">
+          <End Role="Applications" Type="Self.Application" Multiplicity="1" />
+          <End Role="Roles" Type="Self.Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QuoteLine__CatID__19DFD96B">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="QuoteLine" Type="Self.QuoteLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CatID" />
+            </Principal>
+            <Dependent Role="QuoteLine">
+              <PropertyRef Name="CatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TrailerDe__CatID__160F4887">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="TrailerDefaults" Type="Self.TrailerDefault" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CatID" />
+            </Principal>
+            <Dependent Role="TrailerDefaults">
+              <PropertyRef Name="CatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TrailerOp__CatID__2BFE89A6">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="TrailerOption" Type="Self.TrailerOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CatID" />
+            </Principal>
+            <Dependent Role="TrailerOption">
+              <PropertyRef Name="CatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customer__Compan__1E6F845E">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customer__Compan__1F63A897">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Customer__Compan__2057CCD0">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QuoteHdr__Compan__22751F6C">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="QuoteHdr" Type="Self.QuoteHdr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="QuoteHdr">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QuoteHdr__Custom__245D67DE">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="QuoteHdr" Type="Self.QuoteHdr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="QuoteHdr">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QuoteHdr__Delive__395884C4">
+          <End Role="DeliveryTerm" Type="Self.DeliveryTerm" Multiplicity="0..1" />
+          <End Role="QuoteHdr" Type="Self.QuoteHdr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeliveryTerm">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuoteHdr">
+              <PropertyRef Name="DeliveryTermId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MembershipUser">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Memberships" Type="Self.Membership" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserProfile">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="Profiles" Type="Self.Profile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Profiles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QuoteHdr__Traile__2645B050">
+          <End Role="Trailer" Type="Self.Trailer" Multiplicity="1" />
+          <End Role="QuoteHdr" Type="Self.QuoteHdr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trailer">
+              <PropertyRef Name="TrailerID" />
+            </Principal>
+            <Dependent Role="QuoteHdr">
+              <PropertyRef Name="TrailerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QuoteLine__Quote__25518C17">
+          <End Role="QuoteHdr" Type="Self.QuoteHdr" Multiplicity="0..1" />
+          <End Role="QuoteLine" Type="Self.QuoteLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuoteHdr">
+              <PropertyRef Name="QuoteID" />
+            </Principal>
+            <Dependent Role="QuoteLine">
+              <PropertyRef Name="QuoteHdrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuoteHdr_Registration">
+          <End Role="Registration" Type="Self.Registration" Multiplicity="0..1" />
+          <End Role="QuoteHdr" Type="Self.QuoteHdr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="RegistrationID" />
+            </Principal>
+            <Dependent Role="QuoteHdr">
+              <PropertyRef Name="RegistrationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuoteHdr_Transportation">
+          <End Role="Transportation" Type="Self.Transportation" Multiplicity="0..1" />
+          <End Role="QuoteHdr" Type="Self.QuoteHdr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transportation">
+              <PropertyRef Name="TransportationID" />
+            </Principal>
+            <Dependent Role="QuoteHdr">
+              <PropertyRef Name="TransportationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuoteLineDefaults_QuoteHdr">
+          <End Role="QuoteHdr" Type="Self.QuoteHdr" Multiplicity="0..1" />
+          <End Role="QuoteLineDefaults" Type="Self.QuoteLineDefault" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuoteHdr">
+              <PropertyRef Name="QuoteID" />
+            </Principal>
+            <Dependent Role="QuoteLineDefaults">
+              <PropertyRef Name="QuoteHdrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TrailerDe__Trail__151B244E">
+          <End Role="Trailer" Type="Self.Trailer" Multiplicity="1" />
+          <End Role="TrailerDefaults" Type="Self.TrailerDefault" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trailer">
+              <PropertyRef Name="TrailerID" />
+            </Principal>
+            <Dependent Role="TrailerDefaults">
+              <PropertyRef Name="TrailerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TrailerDe__Trail__5AB9788F">
+          <End Role="Trailer" Type="Self.Trailer" Multiplicity="1" />
+          <End Role="TrailerDefaults" Type="Self.TrailerDefault" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trailer">
+              <PropertyRef Name="TrailerID" />
+            </Principal>
+            <Dependent Role="TrailerDefaults">
+              <PropertyRef Name="TrailerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TrailerDe__Trail__7849DB76">
+          <End Role="Trailer" Type="Self.Trailer" Multiplicity="1" />
+          <End Role="TrailerDefaults" Type="Self.TrailerDefault" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trailer">
+              <PropertyRef Name="TrailerID" />
+            </Principal>
+            <Dependent Role="TrailerDefaults">
+              <PropertyRef Name="TrailerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsersInRoleUser">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="UsersInRoles" Type="Self.UsersInRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KruegerQuotesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Applications" EntityType="Self.Application" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="DeliveryTerms" EntityType="Self.DeliveryTerm" />
+          <EntitySet Name="Footers" EntityType="Self.Footer" />
+          <EntitySet Name="Memberships" EntityType="Self.Membership" />
+          <EntitySet Name="Profiles" EntityType="Self.Profile" />
+          <EntitySet Name="QuoteHdrs" EntityType="Self.QuoteHdr" />
+          <EntitySet Name="QuoteLines" EntityType="Self.QuoteLine" />
+          <EntitySet Name="QuoteLineDefaults" EntityType="Self.QuoteLineDefault" />
+          <EntitySet Name="QuoteRefs" EntityType="Self.QuoteRef" />
+          <EntitySet Name="Registrations" EntityType="Self.Registration" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Settings" EntityType="Self.Setting" />
+          <EntitySet Name="Trailers" EntityType="Self.Trailer" />
+          <EntitySet Name="TrailerDefaults" EntityType="Self.TrailerDefault" />
+          <EntitySet Name="TrailerOptions" EntityType="Self.TrailerOption" />
+          <EntitySet Name="TrailerQuestions" EntityType="Self.TrailerQuestion" />
+          <EntitySet Name="TrailerQuestionAnswers" EntityType="Self.TrailerQuestionAnswer" />
+          <EntitySet Name="Transportations" EntityType="Self.Transportation" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UsersInRoles" EntityType="Self.UsersInRole" />
+          <EntitySet Name="ReportTables" EntityType="Self.ReportTable" />
+          <EntitySet Name="Wages" EntityType="Self.Wage" />
+          <EntitySet Name="zzzs" EntityType="Self.zzz" />
+          <EntitySet Name="zzzTrailerOptions" EntityType="Self.zzzTrailerOption" />
+          <AssociationSet Name="MembershipApplication" Association="Self.MembershipApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="RoleApplication" Association="Self.RoleApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QuoteLine__CatID__19DFD96B" Association="Self.FK__QuoteLine__CatID__19DFD96B">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="QuoteLine" EntitySet="QuoteLines" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TrailerDe__CatID__160F4887" Association="Self.FK__TrailerDe__CatID__160F4887">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="TrailerDefaults" EntitySet="TrailerDefaults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TrailerOp__CatID__2BFE89A6" Association="Self.FK__TrailerOp__CatID__2BFE89A6">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="TrailerOption" EntitySet="TrailerOptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customer__Compan__1E6F845E" Association="Self.FK__Customer__Compan__1E6F845E">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customer__Compan__1F63A897" Association="Self.FK__Customer__Compan__1F63A897">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Customer__Compan__2057CCD0" Association="Self.FK__Customer__Compan__2057CCD0">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QuoteHdr__Compan__22751F6C" Association="Self.FK__QuoteHdr__Compan__22751F6C">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="QuoteHdr" EntitySet="QuoteHdrs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QuoteHdr__Custom__245D67DE" Association="Self.FK__QuoteHdr__Custom__245D67DE">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="QuoteHdr" EntitySet="QuoteHdrs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QuoteHdr__Delive__395884C4" Association="Self.FK__QuoteHdr__Delive__395884C4">
+            <End Role="DeliveryTerm" EntitySet="DeliveryTerms" />
+            <End Role="QuoteHdr" EntitySet="QuoteHdrs" />
+          </AssociationSet>
+          <AssociationSet Name="MembershipUser" Association="Self.MembershipUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="UserProfile" Association="Self.UserProfile">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Profiles" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QuoteHdr__Traile__2645B050" Association="Self.FK__QuoteHdr__Traile__2645B050">
+            <End Role="Trailer" EntitySet="Trailers" />
+            <End Role="QuoteHdr" EntitySet="QuoteHdrs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QuoteLine__Quote__25518C17" Association="Self.FK__QuoteLine__Quote__25518C17">
+            <End Role="QuoteHdr" EntitySet="QuoteHdrs" />
+            <End Role="QuoteLine" EntitySet="QuoteLines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuoteHdr_Registration" Association="Self.FK_QuoteHdr_Registration">
+            <End Role="Registration" EntitySet="Registrations" />
+            <End Role="QuoteHdr" EntitySet="QuoteHdrs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuoteHdr_Transportation" Association="Self.FK_QuoteHdr_Transportation">
+            <End Role="Transportation" EntitySet="Transportations" />
+            <End Role="QuoteHdr" EntitySet="QuoteHdrs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuoteLineDefaults_QuoteHdr" Association="Self.FK_QuoteLineDefaults_QuoteHdr">
+            <End Role="QuoteHdr" EntitySet="QuoteHdrs" />
+            <End Role="QuoteLineDefaults" EntitySet="QuoteLineDefaults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TrailerDe__Trail__151B244E" Association="Self.FK__TrailerDe__Trail__151B244E">
+            <End Role="Trailer" EntitySet="Trailers" />
+            <End Role="TrailerDefaults" EntitySet="TrailerDefaults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TrailerDe__Trail__5AB9788F" Association="Self.FK__TrailerDe__Trail__5AB9788F">
+            <End Role="Trailer" EntitySet="Trailers" />
+            <End Role="TrailerDefaults" EntitySet="TrailerDefaults" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TrailerDe__Trail__7849DB76" Association="Self.FK__TrailerDe__Trail__7849DB76">
+            <End Role="Trailer" EntitySet="Trailers" />
+            <End Role="TrailerDefaults" EntitySet="TrailerDefaults" />
+          </AssociationSet>
+          <AssociationSet Name="UsersInRoleUser" Association="Self.UsersInRoleUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UsersInRoles" EntitySet="UsersInRoles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KruegerQuotesModelStoreContainer" CdmEntityContainer="KruegerQuotesEntities">
+          <EntitySetMapping Name="Applications">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.Application">
+              <MappingFragment StoreEntitySet="Applications">
+                <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="ContactFirstName" ColumnName="ContactFirstName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Suburb" ColumnName="Suburb" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactSurname" ColumnName="ContactSurname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeliveryTerms">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.DeliveryTerm">
+              <MappingFragment StoreEntitySet="DeliveryTerm">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DeliveryTerm1" ColumnName="DeliveryTerm" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Footers">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.Footer">
+              <MappingFragment StoreEntitySet="Footer">
+                <ScalarProperty Name="FooterID" ColumnName="FooterID" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Memberships">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.Membership">
+              <MappingFragment StoreEntitySet="Memberships">
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+                <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+                <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+                <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+                <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptWindowsStart" ColumnName="FailedPasswordAnswerAttemptWindowsStart" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profiles">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.Profile">
+              <MappingFragment StoreEntitySet="Profiles">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PropertyNames" ColumnName="PropertyNames" />
+                <ScalarProperty Name="PropertyValueStrings" ColumnName="PropertyValueStrings" />
+                <ScalarProperty Name="PropertyValueBinary" ColumnName="PropertyValueBinary" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuoteHdrs">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.QuoteHdr">
+              <MappingFragment StoreEntitySet="QuoteHdr">
+                <ScalarProperty Name="QuoteID" ColumnName="QuoteID" />
+                <ScalarProperty Name="QuoteRef" ColumnName="QuoteRef" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="TrailerID" ColumnName="TrailerID" />
+                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
+                <ScalarProperty Name="ItemDescriptionShort" ColumnName="ItemDescriptionShort" />
+                <ScalarProperty Name="ItemDescriptionLong" ColumnName="ItemDescriptionLong" />
+                <ScalarProperty Name="ItemSalesDescription" ColumnName="ItemSalesDescription" />
+                <ScalarProperty Name="DrawingNo" ColumnName="DrawingNo" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="TareWeight" ColumnName="TareWeight" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="SellPrice" ColumnName="SellPrice" />
+                <ScalarProperty Name="CostMaterial" ColumnName="CostMaterial" />
+                <ScalarProperty Name="CreatedDateTime" ColumnName="CreatedDateTime" />
+                <ScalarProperty Name="AllowReprint" ColumnName="AllowReprint" />
+                <ScalarProperty Name="DeliveryTermId" ColumnName="DeliveryTermId" />
+                <ScalarProperty Name="QuoteFile" ColumnName="QuoteFile" />
+                <ScalarProperty Name="SpecialRequirement" ColumnName="SpecialRequirement" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="SpecReqSellPrice" ColumnName="SpecReqSellPrice" />
+                <ScalarProperty Name="SpecReqSellCost" ColumnName="SpecReqSellCost" />
+                <ScalarProperty Name="CostedBy" ColumnName="CostedBy" />
+                <ScalarProperty Name="Timestamp" ColumnName="Timestamp" />
+                <ScalarProperty Name="RegistrationId" ColumnName="RegistrationId" />
+                <ScalarProperty Name="TransportationId" ColumnName="TransportationId" />
+                <ScalarProperty Name="WarrantyPeriod" ColumnName="WarrantyPeriod" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="CubicCapacity" ColumnName="CubicCapacity" />
+                <ScalarProperty Name="QuoteRefId" ColumnName="QuoteRefId" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="DiscountType" ColumnName="DiscountType" />
+                <ScalarProperty Name="ShowRequirementOnQuote" ColumnName="ShowRequirementOnQuote" />
+                <ScalarProperty Name="SpecialRequirementB" ColumnName="SpecialRequirementB" />
+                <ScalarProperty Name="SpecReqSellPriceB" ColumnName="SpecReqSellPriceB" />
+                <ScalarProperty Name="SpecReqSellCostB" ColumnName="SpecReqSellCostB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuoteLines">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.QuoteLine">
+              <MappingFragment StoreEntitySet="QuoteLine">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="OptionID" ColumnName="OptionID" />
+                <ScalarProperty Name="OptionDescription" ColumnName="OptionDescription" />
+                <ScalarProperty Name="UoM" ColumnName="UoM" />
+                <ScalarProperty Name="UnitsPerTrailer" ColumnName="UnitsPerTrailer" />
+                <ScalarProperty Name="TareWeightOption" ColumnName="TareWeightOption" />
+                <ScalarProperty Name="DrawingNo" ColumnName="DrawingNo" />
+                <ScalarProperty Name="PartNo" ColumnName="PartNo" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="SellPrice" ColumnName="SellPrice" />
+                <ScalarProperty Name="CostMaterial" ColumnName="CostMaterial" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="CommentQuoteLine" ColumnName="CommentQuoteLine" />
+                <ScalarProperty Name="AllowDiscount" ColumnName="AllowDiscount" />
+                <ScalarProperty Name="QuoteHdrId" ColumnName="QuoteHdrId" />
+                <ScalarProperty Name="isDefault" ColumnName="isDefault" />
+                <ScalarProperty Name="PriceBookSell" ColumnName="PriceBookSell" />
+                <ScalarProperty Name="CubicCapacityOption" ColumnName="CubicCapacityOption" />
+                <ScalarProperty Name="MaximumUnits" ColumnName="MaximumUnits" />
+                <ScalarProperty Name="UnitMultiplier" ColumnName="UnitMultiplier" />
+                <ScalarProperty Name="OptionQuantity" ColumnName="OptionQuantity" />
+                <ScalarProperty Name="PrintQuantityOnQuote" ColumnName="PrintQuantityOnQuote" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuoteLineDefaults">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.QuoteLineDefault">
+              <MappingFragment StoreEntitySet="QuoteLineDefaults">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="OptionID" ColumnName="OptionID" />
+                <ScalarProperty Name="OptionDescription" ColumnName="OptionDescription" />
+                <ScalarProperty Name="UoM" ColumnName="UoM" />
+                <ScalarProperty Name="UnitsPerTrailer" ColumnName="UnitsPerTrailer" />
+                <ScalarProperty Name="TareWeightOption" ColumnName="TareWeightOption" />
+                <ScalarProperty Name="DrawingNo" ColumnName="DrawingNo" />
+                <ScalarProperty Name="PartNo" ColumnName="PartNo" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="SellPrice" ColumnName="SellPrice" />
+                <ScalarProperty Name="CostMaterial" ColumnName="CostMaterial" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="CommentQuoteLine" ColumnName="CommentQuoteLine" />
+                <ScalarProperty Name="AllowDiscount" ColumnName="AllowDiscount" />
+                <ScalarProperty Name="QuoteHdrId" ColumnName="QuoteHdrId" />
+                <ScalarProperty Name="CubicCapacityOption" ColumnName="CubicCapacityOption" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuoteRefs">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.QuoteRef">
+              <MappingFragment StoreEntitySet="QuoteRefs">
+                <ScalarProperty Name="QuoteRefId" ColumnName="QuoteRefId" />
+                <ScalarProperty Name="QuoteRef1" ColumnName="QuoteRef" />
+                <ScalarProperty Name="DateQuoted" ColumnName="DateQuoted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registrations">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.Registration">
+              <MappingFragment StoreEntitySet="Registration">
+                <ScalarProperty Name="RegistrationID" ColumnName="RegistrationID" />
+                <ScalarProperty Name="RegistrationDescription" ColumnName="RegistrationDescription" />
+                <ScalarProperty Name="RegoFee" ColumnName="RegoFee" />
+                <ScalarProperty Name="PlateFee" ColumnName="PlateFee" />
+                <ScalarProperty Name="isDefault" ColumnName="isDefault" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="AdminFee" ColumnName="AdminFee" />
+                <ScalarProperty Name="ProcessingFee" ColumnName="ProcessingFee" />
+                <ScalarProperty Name="StampDuty" ColumnName="StampDuty" />
+                <ScalarProperty Name="TrailerType" ColumnName="TrailerType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="SettingId" ColumnName="SettingId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trailers">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.Trailer">
+              <MappingFragment StoreEntitySet="Trailer">
+                <ScalarProperty Name="TrailerID" ColumnName="TrailerID" />
+                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
+                <ScalarProperty Name="ItemDescriptionShort" ColumnName="ItemDescriptionShort" />
+                <ScalarProperty Name="ItemDescriptionLong" ColumnName="ItemDescriptionLong" />
+                <ScalarProperty Name="ItemSalesDescription" ColumnName="ItemSalesDescription" />
+                <ScalarProperty Name="DrawingNo" ColumnName="DrawingNo" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="TareWeight" ColumnName="TareWeight" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="SellPrice" ColumnName="SellPrice" />
+                <ScalarProperty Name="CostMaterial" ColumnName="CostMaterial" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="MaxDiscount" ColumnName="MaxDiscount" />
+                <ScalarProperty Name="Margin" ColumnName="Margin" />
+                <ScalarProperty Name="WarrantyPeriod" ColumnName="WarrantyPeriod" />
+                <ScalarProperty Name="CubicCapacity" ColumnName="CubicCapacity" />
+                <ScalarProperty Name="TrailerType" ColumnName="TrailerType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrailerDefaults">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.TrailerDefault">
+              <MappingFragment StoreEntitySet="TrailerDefaults">
+                <ScalarProperty Name="TrailerID" ColumnName="TrailerID" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="OptionID" ColumnName="OptionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrailerOptions">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.TrailerOption">
+              <MappingFragment StoreEntitySet="TrailerOption">
+                <ScalarProperty Name="OptionID" ColumnName="OptionID" />
+                <ScalarProperty Name="OptionDescription" ColumnName="OptionDescription" />
+                <ScalarProperty Name="OptionDescriptionExtended" ColumnName="OptionDescriptionExtended" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="UoM" ColumnName="UoM" />
+                <ScalarProperty Name="UnitsPerTrailer" ColumnName="UnitsPerTrailer" />
+                <ScalarProperty Name="TareWeightOption" ColumnName="TareWeightOption" />
+                <ScalarProperty Name="DrawingNo" ColumnName="DrawingNo" />
+                <ScalarProperty Name="PartNo" ColumnName="PartNo" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="SellPrice" ColumnName="SellPrice" />
+                <ScalarProperty Name="CostMaterial" ColumnName="CostMaterial" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="AllowDiscount" ColumnName="AllowDiscount" />
+                <ScalarProperty Name="Margin" ColumnName="Margin" />
+                <ScalarProperty Name="PriceBookPrice" ColumnName="PriceBookPrice" />
+                <ScalarProperty Name="CubicCapacityOption" ColumnName="CubicCapacityOption" />
+                <ScalarProperty Name="MaximumUnits" ColumnName="MaximumUnits" />
+                <ScalarProperty Name="UnitMultiplier" ColumnName="UnitMultiplier" />
+                <ScalarProperty Name="PrintQuantityOnQuote" ColumnName="PrintQuantityOnQuote" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrailerQuestions">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.TrailerQuestion">
+              <MappingFragment StoreEntitySet="TrailerQuestion">
+                <ScalarProperty Name="TrailerID" ColumnName="TrailerID" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrailerQuestionAnswers">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.TrailerQuestionAnswer">
+              <MappingFragment StoreEntitySet="TrailerQuestionAnswer">
+                <ScalarProperty Name="TrailerID" ColumnName="TrailerID" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="OptionID" ColumnName="OptionID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transportations">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.Transportation">
+              <MappingFragment StoreEntitySet="Transportation">
+                <ScalarProperty Name="TransportationID" ColumnName="TransportationID" />
+                <ScalarProperty Name="TransportationDescription" ColumnName="TransportationDescription" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Sell" ColumnName="Sell" />
+                <ScalarProperty Name="isDefault" ColumnName="isDefault" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+                <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersInRoles">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.UsersInRole">
+              <MappingFragment StoreEntitySet="UsersInRoles">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportTables">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.ReportTable">
+              <MappingFragment StoreEntitySet="ReportTable">
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wages">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.Wage">
+              <MappingFragment StoreEntitySet="Wages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HourRate" ColumnName="HourRate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zzzs">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.zzz">
+              <MappingFragment StoreEntitySet="zzz">
+                <ScalarProperty Name="OptionID" ColumnName="OptionID" />
+                <ScalarProperty Name="OptionDescription" ColumnName="OptionDescription" />
+                <ScalarProperty Name="OptionDescriptionExtended" ColumnName="OptionDescriptionExtended" />
+                <ScalarProperty Name="UnitsPerTrailer" ColumnName="UnitsPerTrailer" />
+                <ScalarProperty Name="TareWeightOption" ColumnName="TareWeightOption" />
+                <ScalarProperty Name="SellPrice" ColumnName="SellPrice" />
+                <ScalarProperty Name="CostMaterial" ColumnName="CostMaterial" />
+                <ScalarProperty Name="PriceBookPrice" ColumnName="PriceBookPrice" />
+                <ScalarProperty Name="MaximumUnits" ColumnName="MaximumUnits" />
+                <ScalarProperty Name="UnitMultiplier" ColumnName="UnitMultiplier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zzzTrailerOptions">
+            <EntityTypeMapping TypeName="KruegerQuotesModel.zzzTrailerOption">
+              <MappingFragment StoreEntitySet="zzzTrailerOption">
+                <ScalarProperty Name="OptionID" ColumnName="OptionID" />
+                <ScalarProperty Name="OptionDescription" ColumnName="OptionDescription" />
+                <ScalarProperty Name="OptionDescriptionExtended" ColumnName="OptionDescriptionExtended" />
+                <ScalarProperty Name="CatID" ColumnName="CatID" />
+                <ScalarProperty Name="UoM" ColumnName="UoM" />
+                <ScalarProperty Name="UnitsPerTrailer" ColumnName="UnitsPerTrailer" />
+                <ScalarProperty Name="TareWeightOption" ColumnName="TareWeightOption" />
+                <ScalarProperty Name="DrawingNo" ColumnName="DrawingNo" />
+                <ScalarProperty Name="PartNo" ColumnName="PartNo" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="SellPrice" ColumnName="SellPrice" />
+                <ScalarProperty Name="CostMaterial" ColumnName="CostMaterial" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="AllowDiscount" ColumnName="AllowDiscount" />
+                <ScalarProperty Name="Margin" ColumnName="Margin" />
+                <ScalarProperty Name="PriceBookPrice" ColumnName="PriceBookPrice" />
+                <ScalarProperty Name="CubicCapacityOption" ColumnName="CubicCapacityOption" />
+                <ScalarProperty Name="MaximumUnits" ColumnName="MaximumUnits" />
+                <ScalarProperty Name="UnitMultiplier" ColumnName="UnitMultiplier" />
+                <ScalarProperty Name="PrintQuantityOnQuote" ColumnName="PrintQuantityOnQuote" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

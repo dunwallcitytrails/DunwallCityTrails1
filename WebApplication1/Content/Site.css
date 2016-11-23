@@ -22,3 +22,7 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.quote-list-filter {
+    margin-top: 20px;
+}
